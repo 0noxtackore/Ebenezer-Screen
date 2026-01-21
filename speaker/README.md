@@ -1,68 +1,84 @@
 # Speaker Module 🎤
 
-Motor de reconocimiento de voz offline usando Vosk.
+Offline speech‑recognition engine powered by Vosk, providing real‑time voice control for the entire application.
 
-## Archivos Principales
+## Main Files
 
-- **`server.py`** - Servidor WebSocket (Puerto 2700)
-- **`speak.js`** - Cliente de reconocimiento de voz en el navegador
-- **`model/`** - Modelo de lenguaje Vosk para español
+- **`server.py`** – WebSocket server (port 2700)
+- **`speak.js`** – Browser‑side client that captures microphone audio and handles status UI
+- **`model/`** – Vosk Spanish language model directory
 
-## Tecnología
+## Technology
 
 ### Vosk Speech Recognition
-- Reconocimiento de voz offline (sin internet)
-- Modelo en español optimizado
-- Resultados parciales y finales en tiempo real
+
+- Fully offline recognition (no internet connection required)
+- Spanish‑optimized acoustic and language model
+- Partial and final results streamed in real time
 
 ### WebSocket Communication
-- Conexión bidireccional en tiempo real
-- Streaming de audio desde el navegador
-- Respuestas instantáneas
 
-## Flujo de Datos
+- Bidirectional, low‑latency connection between browser and Python backend
+- Continuous audio streaming from `speak.js` to `server.py`
+- Recognized text streamed back to the browser and routed to command handlers
 
+## Data Flow
+
+```text
+Microphone → speak.js → WebSocket → server.py → Vosk Model
+                                         ↓
+                                   Recognized text
+                                         ↓
+                                bible.matcher / routers
+                                         ↓
+                                 Command detection
+                                         ↓
+                              Response back to browser
 ```
-Micrófono → speak.js → WebSocket → server.py → Vosk Model
-                                        ↓
-                                  Texto reconocido
-                                        ↓
-                                  bible.matcher
-                                        ↓
-                              Detección de comandos
-                                        ↓
-                            Respuesta al navegador
-```
 
-## Comandos Detectados
+## Detected Commands
 
-El servidor identifica automáticamente:
-- Referencias bíblicas (ej: "Juan 3:16")
-- Comandos de navegación
-- Búsquedas de mensajes
-- Controles de reproducción
+The server and router logic automatically identify:
 
-## Configuración
+- Bible references (e.g. `"Juan 3:16"`)
+- Navigation commands (open/close Bible, go to Rest, Goodbye, etc.)
+- Sermon searches (Messages module)
+- Hymn selection commands
+- Playback and karaoke‑navigation controls
 
-### Requisitos
+## Configuration
+
+### Requirements
+
 ```bash
 pip install vosk websockets
 ```
 
-### Modelo de Voz
-- Descarga: [vosk-model-small-es-0.42](https://alphacephei.com/vosk/models)
-- Ubicación: `speaker/model/`
+### Voice Model
 
-## Integración
+- Download: [vosk-model-small-es-0.42](https://alphacephei.com/vosk/models)
+- Location: `speaker/model/`
 
-El módulo `speak.js` se comunica con:
-- `bible.js` - Para búsqueda de versículos
-- `message.js` - Para búsqueda de mensajes
-- `hymns.js` - Para himnos
-- `prayer.js` - Para oraciones
+## Integration
 
-## Estado del Micrófono
+The `speak.js` module coordinates with:
 
-- 🔴 Rojo: Escuchando
-- ⚪ Blanco: Inactivo
-- Animación de pulso durante reconocimiento
+- `bible.js` – Bible verse search and navigation
+- `message.js` – Sermon search and karaoke control
+- `song.js` (Hymns) – Hymn selection and navigation
+- `prayer.js` – Prayer‑related commands (where implemented)
+
+## Microphone Status UI
+
+- 🔴 Red: listening / recording
+- ⚪ White: idle
+- Pulsing animation while recognition is active
+
+## Operator Usage
+
+From the operator's perspective, the Speaker module works transparently in the background:
+
+- Start the main server (`python ebenezer.py`) so the WebSocket voice server is available on port 2700.
+- Ensure a compatible Vosk model is present in `speaker/model/`.
+- Watch the microphone icon in the UI to confirm when the system is listening.
+- Speak natural Spanish commands (Bible references, sermon titles, navigation phrases); recognized commands are dispatched automatically to the corresponding modules.

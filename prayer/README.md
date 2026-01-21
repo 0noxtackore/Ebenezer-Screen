@@ -1,28 +1,31 @@
 # Prayer Module 🙏
 
-Módulo de oración interactiva.
+Interactive prayer module for guided and free‑form prayer sessions.
 
-## Archivos
+## Files
 
-- **`prayer.js`** - Lógica de oración guiada
-- **`prayer.css`** - Estilos contemplativos
+- **`prayer.js`** – Logic for guided prayer flows and state handling
+- **`prayer.css`** – Contemplative visual styles and typography
 
-## Estado
+## Status
 
-🚧 **En desarrollo**
+🚧 **In development** – UI and flows are being refined and extended.
 
-## Funcionalidades Planeadas
+## Planned Features
 
-- [ ] Oraciones predefinidas
-- [ ] Modo de oración libre
-- [ ] Temporizador de oración
-- [ ] Fondos contemplativos
-- [ ] Música de fondo suave
+- [ ] Predefined written prayers (e.g. themes such as thanksgiving, intercession, worship)
+- [ ] Free‑form prayer mode with simple text anchors
+- [ ] Prayer timer for focused time blocks
+- [ ] Contemplative backgrounds suitable for projection
+- [ ] Optional soft background music
+- [ ] Integration with voice commands through the Speaker module
 
-## Comandos de Voz (Planeados)
+## Planned Voice Commands (Spanish)
 
-```
+```text
 "Oración"
 "Padre Nuestro"
 "Orar"
 ```
+
+The expectation is that voice commands will be able to open the prayer view and, in time, select specific prayer presets.

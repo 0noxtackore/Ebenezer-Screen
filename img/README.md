@@ -1,19 +1,19 @@
 # Image Resources 🖼️
 
-Recursos visuales del proyecto Ebenezer.
+Visual assets used throughout the Ebenezer Screen project.
 
-## Contenido
+## Contents
 
-- **Logo de Ebenezer** - Imagen principal del sistema
-- Fondos cinemáticos
-- Iconos de interfaz
+- **Ebenezer logo** – Primary branding image for the system
+- Cinematic background images for Bible, Hymns, Messages, Rest, Goodbye, etc.
+- UI icons and small decorative elements
 
-## Formatos
+## Formats
 
-- PNG con transparencia para logos
-- JPG de alta calidad para fondos
-- Optimización para web (balance calidad/tamaño)
+- PNG with transparency for logos and icons
+- High‑quality JPG images for backgrounds
+- Optimized for the web (balance between quality and file size)
 
-## Uso
+## Usage
 
-Los recursos se cargan dinámicamente desde JavaScript según la vista activa.
+Assets are loaded dynamically from JavaScript depending on the active module (e.g. nature backgrounds for Hymns, contemplative images for Rest and Goodbye, etc.).

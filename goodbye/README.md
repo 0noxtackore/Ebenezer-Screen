@@ -1,26 +1,27 @@
 # Goodbye Module 👋
 
-Pantalla de despedida con fondos aleatorios.
+Closing screen with random high‑resolution contemplative backgrounds.
 
-## Archivos
+## Files
 
-- **`goodbye.js`** - Lógica de despedida
-- **`goodbye.css`** - Estilos visuales
+- **`goodbye.js`** – Logic for the goodbye flow and timer
+- **`goodbye.css`** – Visual styles for the closing screen
 
-## Funcionalidad
+## Behavior
 
-- Fondos aleatorios de alta calidad
-- Temporizador de 2 minutos antes de volver al modo descanso
-- Activación por comando de voz
+- Displays a random high‑quality background image
+- After a short period (about 2 minutes), automatically returns to the Rest view
+- Can be activated via voice command or navigation controls
 
-## Comandos de Voz
+## Voice Commands (Spanish)
 
-```
+```text
 "Adiós"
 "Hasta luego"
 "Chao"
 ```
 
-## Fondos
+## Backgrounds
 
-Selección aleatoria de imágenes contemplativas y espirituales de alta resolución.
+- Random selection of contemplative and spiritual images
+- Optimized for high‑resolution displays (1920p, 4K, 8K)

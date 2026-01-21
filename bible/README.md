@@ -1,33 +1,38 @@
 # Bible Module 📖
 
-Módulo de la Biblia Reina Valera 1960 con búsqueda por voz y modo de lectura interactivo.
+Reina‑Valera 1960 Bible module with voice search and an interactive "karaoke" reading experience, optimized for projection.
 
-## Archivos Principales
+## Main Files
 
-- **`bible.json`** - Base de datos completa de la Biblia RV1960 (66 libros, 1,189 capítulos, 31,102 versículos)
-- **`bible.js`** - Lógica de búsqueda, navegación y modo karaoke
-- **`bible.css`** - Estilos cinemáticos para la interfaz
-- **`matcher.py`** - Motor de detección de referencias bíblicas en texto hablado
+- **`bible.json`** – Complete RV1960 Bible database (66 books, 1,189 chapters, 31,102 verses)
+- **`bible.js`** – Logic for search, navigation, verse rendering and karaoke mode
+- **`bible.css`** – Cinematic visual styles and responsive layout (1920p / 4K / 8K)
+- **`matcher.py`** – Engine that detects Bible references inside recognized Spanish speech
 
-## Funcionalidades
+## Features
 
-### Búsqueda por Voz
-- Reconoce nombres de libros con fuzzy matching (tolerante a errores)
-- Soporta abreviaciones y aliases (ej: "Génesis" = "Gen" = "Gn")
-- Búsqueda por capítulo completo o versículos específicos
+### Voice Search
 
-### Modo Karaoke
-- Resalta palabras en tiempo real mientras lees
-- Avance automático de versículos
-- Scroll automático para mantener el versículo activo visible
+- Recognizes book names with fuzzy matching (tolerant of spelling errors)
+- Supports abbreviations and aliases (e.g. "Génesis" = "Gen" = "Gn")
+- Allows searching by whole chapter or by specific verses
+- Accent‑insensitive matching while still displaying properly accented names
 
-### Navegación
-- Salto directo a versículos específicos por voz
-- Búsqueda de contenido dentro del capítulo actual
+### Karaoke Reading Mode
 
-## Comandos de Voz
+- Highlights words in real time as the text is read
+- Automatic verse progression
+- Automatic scrolling to keep the active verse centered and visible
 
-```
+### Navigation
+
+- Direct jumps to specific verses via voice commands
+- Text search within the current chapter
+- Integration with keyboard shortcuts for moving between verses and chapters
+
+## Sample Voice Commands
+
+```text
 "Génesis capítulo 1"
 "Juan 3:16"
 "Apocalipsis capítulo 1 versículo 1"
@@ -35,7 +40,7 @@ Módulo de la Biblia Reina Valera 1960 con búsqueda por voz y modo de lectura i
 "Cerrar Biblia"
 ```
 
-## Estructura de Datos
+## Data Structure
 
 ```json
 {
@@ -48,9 +53,24 @@ Módulo de la Biblia Reina Valera 1960 con búsqueda por voz y modo de lectura i
 }
 ```
 
-## Estilos Visuales
+Each book is a top‑level key, each chapter is an object keyed by chapter number, and each verse is a string inside an ordered array.
 
-- Fondo cinemático con vignette radial
-- Texto negro sobre fondo claro (estilo "tinta impresa")
-- Resaltado amarillo ámbar para palabras activas
-- Scrollbar personalizado minimalista
+## Visual Style
+
+- Cinematic background with radial vignette
+- Dark text on a warm, lightly textured background ("ink on paper" feel)
+- Amber highlighting for active words and verses
+- Minimal, custom scrollbar
+- Large rem‑based typography that scales up on 1920p, 4K and 8K displays
+
+## Keyboard Shortcuts & Display Scaling
+
+The Bible module participates in the global shortcut scheme of the application (numeric keys for switching sections, plus additional keys for navigating verses/chapters and controlling the karaoke flow, where configured).
+
+Font sizes and spacing are defined in `rem` units with dedicated media queries for:
+
+- **1920p** – Comfortable reading size with clear hierarchy between book, chapter and verse
+- **4K (3840×2160)** – Noticeably larger headers and verses, filling more of the screen width
+- **8K (7680×4320)** – Very large, projector‑oriented text designed to be readable from long distances
+
+This makes the same Bible layout suitable for small rooms and large auditoriums alike.

@@ -1,55 +1,62 @@
 # Messages Module 📚
 
-Biblioteca local de mensajes del profeta William Branham traducidos al español.
+Local library of sermons by William Branham translated into Spanish, with fast fuzzy search and karaoke‑style reading.
 
-## Archivos Principales
+## Main Files
 
-### Scripts de Python
-- **`sermon_search.py`** - Motor de búsqueda inteligente con fuzzy matching
-- **`sermon_index.json`** - Índice de 416 sermones únicos
-- **`fetch_all_sermons.py`** - Extractor de metadata del API oficial
-- **`bulk_downloader.py`** - Descargador masivo de contenido
-- **`finalize_index.py`** - Resolución de IDs de producto a IDs de registro
-- **`message_bridge.py`** - Servidor HTTP para búsquedas dinámicas (Puerto 2800)
+### Python Scripts
+
+- **`sermon_search.py`** – Intelligent search engine with fuzzy matching
+- **`sermon_index.json`** – Index of 416 unique sermons
+- **`fetch_all_sermons.py`** – Metadata extractor using the official API
+- **`bulk_downloader.py`** – Bulk downloader for sermon content
+- **`finalize_index.py`** – Resolver from product IDs to record IDs
+- **`message_bridge.py`** – HTTP bridge for dynamic searches (port 2800)
 
 ### Frontend
-- **`message.js`** - Lógica de búsqueda local y modo karaoke
-- **`message.css`** - Estilos cinemáticos
 
-### Datos
-- **`library/`** - Carpeta con 386+ mensajes descargados en formato JSON
-- **`sermon_index.json`** - Índice maestro con títulos y IDs
+- **`message.js`** – Local search logic, UI wiring and karaoke mode
+- **`message.css`** – Cinematic visual styles and responsive layout
 
-## Funcionalidades
+### Data
 
-### Búsqueda Local Instantánea
-- Índice de 416 sermones en memoria
-- Fuzzy matching con algoritmo de Levenshtein
-- Corrección automática de errores tipográficos
-- Ejemplo: "La Señaol" → "LA SEÑAL"
+- **`library/`** – Folder containing 386+ downloaded sermons in JSON form
+- **`sermon_index.json`** – Master index with titles and IDs
 
-### Biblioteca Offline
-- Mensajes almacenados localmente en `library/`
-- Carga instantánea sin necesidad de internet
-- Fallback al bridge dinámico si el mensaje no está descargado
+## Features
 
-### Modo Karaoke
-- Resaltado de palabras en tiempo real
-- Navegación por párrafos
-- Scroll automático
+### Instant Local Search
 
-## Comandos de Voz
+- In‑memory index of 416 sermons
+- Fuzzy matching (Levenshtein‑based) tolerant of typos and partial names
+- Automatic suggestion of the best match
+- Example: `"La Señaol"` → `"LA SEÑAL"`
 
-```
+### Offline Library
+
+- Sermons stored locally under `library/`
+- Instant loading without internet access
+- Fallback to the dynamic HTTP bridge if a sermon is not yet downloaded
+
+### Karaoke Mode
+
+- Word‑by‑word highlighting in real time
+- Paragraph‑level navigation
+- Automatic scrolling to keep the current paragraph visible
+
+## Sample Voice Commands
+
+```text
 "Mensaje La Señal"
 "Mensaje Fe Es La Sustancia"
 "Mensaje La Señal párrafo 50"
 "Párrafo 25"
 ```
 
-## Estructura de Datos
+## Data Structures
 
-### sermon_index.json
+### `sermon_index.json`
+
 ```json
 [
   {
@@ -60,7 +67,8 @@ Biblioteca local de mensajes del profeta William Branham traducidos al español.
 ]
 ```
 
-### library/[id].json
+### `library/[id].json`
+
 ```json
 {
   "title": "LA SEÑAL",
@@ -75,12 +83,26 @@ Biblioteca local de mensajes del profeta William Branham traducidos al español.
 ## API Integration
 
 - **Endpoint**: `https://table.branham.org/rest/userQuery`
-- **Método**: POST
-- **Idioma**: Español (`"Language": "es"`)
+- **Method**: `POST`
+- **Language**: Spanish (`"Language": "es"`)
 
-## Estado Actual
+The Python tools use this API to fetch metadata and content when building or extending the local library.
 
-- ✅ 416 sermones indexados
-- ✅ 386+ sermones descargados localmente
-- ✅ Búsqueda fuzzy implementada
-- 🔄 Investigando expansión a 1,206 sermones
+## Current Status
+
+- ✅ 416 sermons indexed
+- ✅ 386+ sermons downloaded locally
+- ✅ Fuzzy search implemented
+- 🔄 Investigating expansion towards ~1,200 sermons
+
+## Keyboard Shortcuts & Display Scaling
+
+The Messages view integrates with the global navigation and control shortcuts defined in the main application (for example, numeric keys to switch modules and keys to move between paragraphs or toggle preacher‑oriented modes, where implemented).
+
+Typography and layout are based on `rem` units and tuned specifically for:
+
+- **1920p** – Comfortable reading on typical HD projectors
+- **4K (3840×2160)** – Significantly larger text and widened content area
+- **8K (7680×4320)** – Very large titles and paragraphs for distant viewing
+
+This ensures that sermon text remains readable and visually balanced across all supported resolutions.

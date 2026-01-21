@@ -1,28 +1,29 @@
 # Rest Module 😌
 
-Vista de descanso con logo de Ebenezer.
+Idle / rest screen with the Ebenezer logo as a calm visual anchor.
 
-## Archivos
+## Files
 
-- **`rest.js`** - Lógica de modo descanso
-- **`rest.css`** - Estilos minimalistas
+- **`rest.js`** – Logic for entering and leaving rest mode
+- **`rest.css`** – Minimalistic visual styles and logo animation
 
-## Funcionalidad
+## Behavior
 
-- Vista por defecto al iniciar el sistema
-- Logo de Ebenezer con efecto de brillo suave
-- Fondo oscuro contemplativo
-- Activación automática después de inactividad
+- Default view when the system starts
+- Animated Ebenezer logo with a soft glow effect
+- Dark, contemplative background
+- Automatic activation after a period of inactivity
+- Smooth transitions from and back to any other module (Bible, Hymns, Messages, etc.)
 
-## Comandos de Voz
+## Voice Commands
 
-```
+```text
 "Descanso"
 "Inicio"
 ```
 
-## Diseño
+## Design
 
-- Fondo negro con vignette radial
-- Logo centrado con glow effect
-- Transición suave desde cualquier vista
+- Black background with radial vignette
+- Centered logo with glow and animation effects
+- Simple layout designed to look good on 1920p, 4K and 8K displays
