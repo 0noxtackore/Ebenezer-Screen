@@ -1,0 +1,454 @@
+/* Importar fuentes desde Google Fonts */ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Cardo:wght@400;700&display=swap');
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+}
+
+/* Contenedor principal a pantalla completa (el centrado lo maneja .parent-container interna) */
+.bible-container {
+  position: relative;
+  width: 100%;
+  /* Asegurar que el fondo siempre cubra toda la pantalla */
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 100;
+  /* Asegurar que esté encima de cualquier overlay */
+  animation: smoothRevealBible 0.7s ease-out forwards;
+}
+
+@keyframes smoothRevealBible {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Fondo de pergamino a pantalla completa */
+.background-bible {
+  position: absolute;
+  inset: 0;
+  /* background-image set by JS */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: sepia(0.4) contrast(1.1) brightness(0.65) blur(1px);
+  transform: scale(1.02);
+  /* Nitidez total restaurada con suavizado sutil */
+  will-change: opacity, transform;
+  /* Toque antiguo */
+}
+
+/* EFECTO VINYETA: Spotlight Cinematic */
+.background-bible::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Eliminado pseudo-elemento de ruido por degradar calidad visual */
+
+/* Escenario sin tarjeta, texto flotante (centrado vertical por .parent-container) */
+.bible-stage {
+  position: relative;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .bible-stage {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Cuando todavía no hay resultados en Biblia, ocultar título y caja de versículos
+   para que solo se vea el buscador centrado en la pantalla. */
+#bible-container .bible-stage:not(.bible-stage--results) .header,
+#bible-container .bible-stage:not(.bible-stage--results) .verse {
+  display: none;
+}
+
+/* Header (Referencia: GÉNESIS 1:1) */
+.header {
+  margin-bottom: 2rem;
+  /* Texto Negro con Borde Blanco */
+  color: #000;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 2px #fff;
+  text-shadow: 2px 2px 0 rgba(255, 255, 255, 0.5);
+  font-weight: 900;
+}
+
+.title {
+  font-family: "Georgia", serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  font-family: "Georgia", serif;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #000;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 2px #fff;
+}
+
+/* Scrollbar personalizado solo para la caja de versículos */
+.verse::-webkit-scrollbar {
+  width: 12px;
+}
+
+.verse::-webkit-scrollbar-track {
+  background: rgba(62, 39, 35, 0.1);
+  /* Marrón muy suave */
+  border-radius: 6px;
+}
+
+.verse::-webkit-scrollbar-thumb {
+  background-color: #5d4037;
+  /* Marrón oscuro */
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.verse::-webkit-scrollbar-thumb:hover {
+  background-color: #3e2723;
+}
+
+/* Versículo */
+.verse {
+  font-family: poppins, sans-serif;
+  font-size: 2.6rem;
+  line-height: 1.6;
+  max-width: 85%;
+  text-transform: uppercase;
+  font-weight: 600;
+  /* Modo carrusel: una "diapositiva" (versículo) a la vez.
+     Limitamos la altura para que los versículos muy largos no deformen el escenario;
+     en esos casos, solo esta caja hace scroll interno. */
+  min-height: 60vh;
+  max-height: 70vh;
+  overflow-y: auto;
+  /* Centrar también los versículos cortos dentro del marco */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  /* Texto Negro con Borde Blanco */
+  color: #000;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.5px #fff;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  font-weight: 900;
+}
+
+.verse-number {
+  font-size: 1.5rem;
+  vertical-align: super;
+  margin-right: .5rem;
+  color: #d50000;
+  /* Rojo con Borde Blanco */
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1px #fff;
+  text-shadow: none;
+}
+
+@media (min-width: 1920px) {
+  /* Contenedor general: un poco más de respiro lateral */
+  .bible-stage {
+    padding: 2.5rem 3rem;
+  }
+
+  /* Encabezado (ej: GÉNESIS 1) muy grande y un poco más abajo */
+  .header {
+    font-size: 3rem;
+    margin-top: 2.5rem;
+  }
+
+  .title {
+    font-size: 8rem;
+  }
+
+  /* Versículos gigantes y centrados */
+  .verse {
+    font-size: 5rem;
+    max-width: 95%;
+    min-height: 65vh;
+    max-height: 80vh;
+  }
+}
+
+@media (min-width: 3840px) {
+  .bible-stage {
+    padding: 3.5rem 5rem;
+  }
+
+  .header {
+    font-size: 5rem;
+    margin-top: 10rem;
+  }
+
+  .title {
+    font-size: 18rem;
+  }
+
+  .verse {
+    font-size: 13rem;
+    max-width: 90%;
+    min-height: 70vh;
+    max-height: 85vh;
+  }
+}
+
+@media (min-width: 7680px) {
+  .bible-stage {
+    padding: 4rem 6rem;
+  }
+
+  .header {
+    font-size: 6rem;
+    margin-top: 25.5rem;
+  }
+
+  .title {
+    font-size: 35rem;
+  }
+
+  .verse {
+    font-size: 26rem;
+    max-width: 88%;
+    min-height: 72vh;
+    max-height: 88vh;
+  }
+}
+
+/* --- ESTILOS KARAOKE --- */
+
+/* Palabra ya leída */
+.word-matched {
+  color: #ff5252;
+  /* Rojo brillante tipo karaoke */
+  text-decoration: underline;
+  text-decoration-color: #ff5252;
+  text-decoration-thickness: 3px;
+  /* background-color: rgba(255, 204, 188, 0.3);  Quitamos fondo para limpieza visual si tiene borde */
+
+  /* Reforzar visibilidad */
+  color: #d50000;
+  /* Rojo tinta fresca */
+  text-decoration: underline;
+  text-decoration-color: #d50000;
+  text-decoration-thickness: 3px;
+  -webkit-text-stroke: 0;
+  text-shadow: none;
+  font-weight: 800;
+}
+
+/* Versículo completo */
+.chapter-text {
+  line-height: 2;
+  text-align: left;
+  /* Alineación izquierda para lectura */
+}
+
+.verse-item {
+  padding: 5px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: background-color 0.3s, opacity 0.3s;
+  /* Carrusel: ocultar por defecto */
+  display: none;
+  opacity: 0;
+}
+
+.verse-active {
+  background-color: rgba(255, 235, 59, 0.2);
+  /* Resaltado suave de versiculo activo */
+  border-left: 4px solid #d84315;
+  padding-left: 10px;
+  /* Carrusel: solo el versículo activo se muestra como "diapositiva" */
+  display: block;
+  opacity: 1;
+}
+
+/* Barra de pestañas de Biblia (como navegador) */
+.bible-tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin: 0 auto 0.75rem;
+  padding: 0.25rem 0.5rem;
+  max-width: 90%;
+  overflow-x: auto;
+  justify-content: space-between;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.bible-tabs.bible-tabs--compressed {
+  gap: 0.25rem;
+}
+
+.bible-tabs.bible-tabs--compressed .bible-tab {
+  padding: 0.15rem 0.4rem;
+  font-size: 0.75rem;
+  max-width: 120px;
+}
+
+.bible-tabs.bible-tabs--compressed .bible-tab__title {
+  max-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bible-tabs.bible-tabs--compressed-strong .bible-tab {
+  padding: 0.1rem 0.3rem;
+  font-size: 0.7rem;
+  max-width: 90px;
+}
+
+.bible-tabs.bible-tabs--compressed-strong .bible-tab__title {
+  max-width: 60px;
+}
+
+.bible-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px 8px 0 0;
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-bottom: none;
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.bible-tab--active {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+.bible-tab__title {
+  pointer-events: none;
+}
+
+.bible-tab__icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.bible-tab__close {
+  font-size: 0.9rem;
+  line-height: 1;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bible-tab__close:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.bible-tab-add {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-left: 0.25rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #f5f5f5;
+  cursor: pointer;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.bible-tab-add:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Navegación móvil de versículos (barra dentro de la sección Biblia) */
+/* Oculta por defecto y también mientras la Biblia está en modo búsqueda
+   (sin clase .bible-stage--results). Solo se mostrará en móvil cuando
+   hay resultados. */
+.bible-mobile-nav {
+  display: none;
+  margin-top: 1rem;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.bible-mobile-nav__button {
+  padding: 0.35rem 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.6);
+  background: rgba(255,255,255,0.88);
+  color: #222;
+  font-family: Poppins, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .bible-stage {
+    padding: 1.5rem;
+  }
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .verse {
+    font-size: 2rem;
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 480px) {
+  .bible-stage {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2.2rem;
+  }
+
+  .verse {
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+
+  /* Solo mostrar la barra móvil cuando hay resultados en Biblia */
+  #bible-container .bible-stage.bible-stage--results .bible-mobile-nav {
+    display: flex;
+  }
+}

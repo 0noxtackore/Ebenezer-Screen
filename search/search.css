@@ -1,0 +1,595 @@
+img, video {
+  -webkit-user-drag: none;  /* evita arrastrar en Chrome/Safari */
+  user-select: none;        /* evita selección accidental */
+}
+
+.main-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            z-index: 9999; /* por encima de cualquier fondo/overlay */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .main-menu__items {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            width: 100%;
+        }
+
+        .main-menu__item {
+            color: #f5f5f5;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            padding: 0.4rem 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: transparent;
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            user-select: none;
+        }
+
+        .main-menu__item:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .main-menu__item--active {
+            background: #f5f5f5;
+            color: #111111;
+            border-color: #f5f5f5;
+        }
+
+        body {
+            padding-top: 56px;
+        }
+
+        /* Barra inferior para móviles (oculta en escritorio por defecto) */
+        .mobile-bottom-nav {
+            display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 52px;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.25);
+            z-index: 9999;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0 0.25rem;
+        }
+
+        .mobile-bottom-nav__item {
+            flex: 1;
+            margin: 0 0.15rem;
+            padding: 0.25rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 999px;
+            background: transparent;
+            color: #f5f5f5;
+            font-size: 0.8rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .mobile-bottom-nav__icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Botón de menú (hamburguesa), oculto en escritorio */
+        .main-menu__toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            padding: 0.35rem 0.6rem;
+            cursor: pointer;
+        }
+
+        .main-menu__toggle-icon {
+            width: 24px;
+            height: 24px;
+            display: block;
+        }
+
+        /* Aumentar tamaño de pestañas e inputs en pantallas muy grandes */
+        @media (min-width: 1920px) {
+            .main-menu {
+                height: 80px;
+            }
+
+            body {
+                padding-top: 80px;
+            }
+
+            .main-menu__item {
+                font-size: 1.8rem;
+                padding: 1.1rem 2.6rem;
+            }
+
+            .search-form__wrapper {
+                padding: 1.6rem 3.2rem;
+            }
+
+            .search-form__logo {
+                width: 130px;
+                height: 130px;
+            }
+
+            .search-form__icon {
+                width: 32px;
+                height: 32px;
+            }
+
+            .search-form__input {
+                font-size: 3rem;
+                padding: 1rem 1.8rem;
+            }
+
+            #bible-search-results,
+            #hymn-search-results,
+            #message-search-results {
+                font-size: 1.8rem;
+                padding: 1rem 2.4rem;
+            }
+
+            /* Ocultar sugerencias de búsqueda en pantallas muy grandes */
+            .search-suggestions {
+                display: none !important;
+            }
+
+            /* Ocultar cualquier pestaña (superior o inferior) en pantallas muy grandes */
+            .main-menu__item,
+            .mobile-bottom-nav,
+            .mobile-bottom-nav__item,
+            .bible-tabs {
+                display: none !important;
+            }
+        }
+        /* --- Estilos profesionales para buscadores (Biblia / Himnos / Mensajes) --- */
+
+        /* 1. Contenedor padre para centrar verticalmente el buscador */
+        .parent-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 56px);
+            width: 100%;
+        }
+
+        @media (max-width: 480px) {
+            .parent-container {
+                padding-bottom: 56px;
+            }
+        }
+
+        /* 2. Formulario de búsqueda en columna (reutilizado por Biblia / Himnos / Mensajes) */
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            width: 100%;
+            max-width: 1100px;
+            padding: 0 1.5rem;
+        }
+
+        .search-form__wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.16);
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.25),
+                0 8px 24px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .search-form__icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            object-fit: contain;
+            filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.6));
+        }
+
+        .search-form__logo {
+            width: 55px;
+            height: 55px;
+            flex-shrink: 0;
+            object-fit: contain;
+        }
+
+        .search-form__input {
+            flex: 1;
+            min-width: 0;
+            border: none;
+            outline: none;
+            padding: 0.5rem 1rem;
+            font-size: 1.8rem;
+            border-radius: 999px;
+            background: transparent;
+            color: #f5f5f5;
+            text-align: center;
+        }
+
+        .search-form__icon-button {
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .search-form__input::placeholder {
+            color: rgba(245, 245, 245, 0.7);
+        }
+
+        /* Para que los tres buscadores queden exactamente alineados en el centro,
+           todos usan los mismos márgenes verticales (cero) */
+        #bible-search-form,
+        #hymn-search-form,
+        #message-search-form {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        /* Panel de sugerencias elegante para Himnos (lista personalizada) */
+        .search-suggestions {
+            position: relative;
+            width: 100%;
+            margin-top: 0.05rem;
+            background: rgba(0, 0, 0, 0.80);
+            border-radius: 18px;
+            box-shadow:
+                0 4px 8px rgba(0, 0, 0, 0.35),
+                0 12px 32px rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(12px);
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .search-suggestions--hidden {
+            display: none;
+        }
+
+        .search-suggestions__list {
+            list-style: none;
+            margin: 0;
+            padding: 0.35rem 0;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+
+        .search-suggestions__item {
+            padding: 0.4rem 1.25rem;
+            cursor: pointer;
+            font-size: 0.98rem;
+            color: #f5f5f5;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+
+        .search-suggestions__item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* Ocultar flecha del desplegable nativo en inputs con datalist (Himnos y Mensajes) */
+        #hymn-number-input,
+        #message-search-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+
+        #hymn-number-input::-webkit-calendar-picker-indicator,
+        #message-search-input::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+
+        /* WebKit: ocultar botón de lista de datalist (flecha) */
+        #hymn-number-input::-webkit-list-button,
+        #message-search-input::-webkit-list-button {
+            appearance: none;
+            -webkit-appearance: none;
+            display: none;
+        }
+
+        /* Select profesional para resultados de Biblia (estilo input sin flechas) */
+        #bible-search-results, #hymn-search-results, #message-search-results {
+            background: rgba(0, 0, 0, 0.55);
+            color: #f5f5f5;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            padding: 0.6rem 1.5rem;
+            font-size: 1.1rem;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.25),
+                0 8px 24px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        #bible-search-results:focus , #hymn-search-results:focus, #message-search-results:focus {
+            border-color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Ocultar flecha nativa en navegadores */
+        #bible-search-results::-ms-expand, #hymn-search-results::-ms-expand, #message-search-results::-ms-expand {
+            display: none;
+        }
+
+        #bible-search-results option, #hymn-search-results option, #message-search-results option {
+            background-color: #111;
+            color: #f5f5f5;
+        }
+
+        /* Centrar verticalmente buscadores de Biblia y Mensajes (Himnos usa .parent-container interna) */
+        #bible-container .bible-stage,
+        #messages-container .messages-stage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 56px);
+            width: 100%;
+        }
+
+        /* Cuando hay resultados: buscador arriba y contenido abajo */
+        #bible-container .bible-stage.bible-stage--results {
+            justify-content: flex-start;
+            padding-top: 3rem;
+        }
+
+        #hymns-container.hymns-container--results .parent-container {
+            justify-content: flex-start;
+            padding-top: 3rem;
+        }
+
+        #messages-container .messages-stage.messages-stage--results {
+            justify-content: flex-start;
+            padding-top: 6rem;
+        }
+
+        /* Ocultar barra de búsqueda cuando ya hay resultados */
+        #bible-container .bible-stage.bible-stage--results #bible-search-form,
+        #hymns-container.hymns-container--results #hymn-search-form,
+        #messages-container .messages-stage.messages-stage--results #message-search-form {
+            display: none;
+        }
+
+        /* (Se elimina overlay móvil; usamos panel desplegable clásico bajo la barra) */
+
+        /* --- Responsive: ajustes para pantallas pequeñas (móviles y tablets) --- */
+
+        @media (max-width: 1024px) {
+            /* Ocultar menú superior original y usar solo la barra inferior en móviles */
+            .main-menu {
+                display: none;
+            }
+
+            /* Sin menú superior, el body ya no necesita padding-top */
+            body {
+                padding-top: 0;
+            }
+
+            /* Hacer que el contenido de secciones ocupe toda la altura del viewport.
+               El fondo de cada sección ya es 100vh; aquí ajustamos el contenedor
+               para que no se "corte" antes y el fondo parezca de pantalla completa. */
+            .parent-container {
+                min-height: 100vh;
+                padding-top: 0.5rem;
+                padding-bottom: 60px; /* espacio para no quedar tapado por la barra inferior */
+            }
+
+            /* Asegurar que todos los contenedores principales llenan la pantalla en móviles */
+            #voice-container,
+            #bible-container,
+            #hymns-container,
+            #messages-container,
+            #class-container,
+            #specials-container,
+            #prayer-container,
+            #goodbye-container {
+                min-height: 100vh;
+            }
+
+            .search-form {
+                gap: 0.75rem;
+                padding: 0 1rem;
+            }
+
+            .search-form__wrapper {
+                padding: 0.7rem 1.2rem;
+                gap: 0.35rem;
+            }
+
+            .search-form__logo {
+                width: 42px;
+                height: 42px;
+            }
+
+            .search-form__icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .search-form__input {
+                font-size: 1.2rem;
+                padding: 0.35rem 0.75rem;
+            }
+
+            .search-suggestions {
+                max-width: 90vw;
+            }
+
+            /* Mostrar barra inferior solo en móviles */
+            .mobile-bottom-nav {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-menu {
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+
+            .search-form__wrapper {
+                padding: 0.6rem 0.9rem;
+            }
+
+            .search-form__logo {
+                width: 36px;
+                height: 36px;
+            }
+
+            .search-form__input {
+                font-size: 1rem;
+            }
+        }
+
+        /* Override para pantallas muy grandes: seguir ocultando menú y usar tamaños gigantes */
+        @media (min-width: 1920px) {
+            /* Seguir ocultando el menú en pantallas muy grandes */
+            .main-menu {
+                display: none;
+                height: 0;
+            }
+
+            body {
+                padding-top: 0;
+            }
+            
+            .search-form {
+                max-width: none;
+                width: 100%;
+            }
+
+            .search-form__wrapper {
+                padding: 1.6rem 3.2rem;
+                max-width: none;
+            }
+
+            .search-form__logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .search-form__icon {
+                width: 200px;
+            }
+
+            .search-form__icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .search-form__input {
+                font-size: 3rem;
+                padding: 1.8rem 2.8rem;
+            }
+
+            #bible-search-results,
+            #hymn-search-results,
+            #message-search-results {
+                font-size: 1.8rem;
+                padding: 1rem 2.4rem;
+            }
+        }
+
+        /* Escalado adicional para 4K (3840x2160 y superiores) */
+        @media (min-width: 3840px) {
+            .search-form {
+                max-width: none;
+                width: 100%;
+            }
+
+            .search-form__wrapper {
+                padding: 3.4rem 6.2rem;
+                max-width: none;
+                width: 100%;
+            }
+
+            .search-form__logo {
+                width: 260px;
+                height: 260px;
+            }
+
+            .search-form__icon {
+                width: 160px;
+                height: 160px;
+            }
+
+            .search-form__input {
+                font-size: 8rem;
+                padding: 2.4rem 4rem;
+            }
+
+            #bible-search-results,
+            #hymn-search-results,
+            #message-search-results {
+                font-size: 3.2rem;
+                padding: 1.8rem 3.8rem;
+            }
+        }
+
+        /* Escalado extremo para 8K (7680x4320 y superiores) */
+        @media (min-width: 7680px) {
+            .search-form__wrapper {
+                padding: 3.6rem 7.2rem;
+            }
+
+            .search-form__logo {
+                width: 560px;
+                height: 560px;
+            }
+
+            .search-form__icon {
+                width: 280px;
+                height: 280px;
+            }
+
+            .search-form__input {
+                font-size: 10rem;
+                padding: 3rem 5.2rem;
+            }
+
+            #bible-search-results,
+            #hymn-search-results,
+            #message-search-results {
+                font-size: 4.2rem;
+                padding: 2.4rem 5rem;
+            }
+        }

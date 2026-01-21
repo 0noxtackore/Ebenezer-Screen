@@ -1,0 +1,141 @@
+/* Contenedor principal de Clase Bíblica (similar a prayer, pero independiente) */
+#class-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.background-class {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: brightness(0.6) blur(1px);
+  transform: scale(1.03);
+}
+
+.background-class::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.7) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.class-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.class-title {
+  font-family: 'Impact', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.5px #000;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+}
+
+.class-ref {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1px #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+}
+
+.class-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  max-width: 80%;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.8px #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
+}
+
+@media (min-width: 1920px) {
+  .class-title {
+    font-size: 10rem;
+  }
+
+  .class-ref {
+    font-size: 6rem;
+  }
+
+  .class-text {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .class-title {
+    font-size: 20rem;
+  }
+
+  .class-ref {
+    font-size: 10rem;
+  }
+
+  .class-text {
+    font-size: 8rem;
+  }
+}
+
+@media (min-width: 7680px) {
+  .class-title {
+    font-size: 30rem;
+  }
+
+  .class-ref {
+    font-size: 18rem;
+  }
+
+  .class-text {
+    font-size: 17rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .class-stage {
+    padding: 2rem;
+  }
+
+  .class-title {
+    font-size: 2.4rem;
+  }
+
+  .class-text {
+    font-size: 1.4rem;
+    max-width: 90%;
+  }
+}

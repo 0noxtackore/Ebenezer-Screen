@@ -1,0 +1,73 @@
+[
+  {
+    "number": 1,
+    "title": "GRACIA PARA VENCER",
+    "verses": [
+      {
+        "type": "verse",
+        "number": 1,
+        "lines": [
+          "SÉ QUE HAY MONTAÑAS",
+          "MUY ALTAS EN LA VIDA,",
+          "Y HAY CAMINOS TORTUOSOS",
+          "POR DOQUIER,",
+          "SÉ QUE HAY ABISMOS",
+          "PROFUNDOS E INSONDABLES,",
+          "MAS CON TU AYUDA, SEÑOR,",
+          "HE DE VENCER."
+        ]
+      },
+      {
+        "type": "chorus",
+        "lines": [
+          "YO NO TE PIDO, SEÑOR:",
+          "\"QUITA LAS PRUEBAS\",",
+          "NI TE SUPLICO, SEÑOR:",
+          "\"DÉJAME HUIR\",",
+          "TAMPOCO PIDO, SEÑOR,",
+          "QUE TÚ ME LLEVES,",
+          "GRACIA TE PIDO, SEÑOR,",
+          "PARA VENCER."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 2,
+        "lines": [
+          "SÉ QUE HAY RÍOS",
+          "QUE SON MUY CAUDALOSOS,",
+          "Y HAY MURALLAS",
+          "MUY DURAS DE ESCALAR,",
+          "SÉ QUE HAY VALLES",
+          "OSCUROS, TENEBROSOS,",
+          "MAS DAME FUERZAS, SEÑOR,",
+          "PARA TRIUNFAR."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 3,
+        "lines": [
+          "VIENEN MOMENTOS",
+          "CUANDO CASI DESMAYO,",
+          "CUANDO TEMORES",
+          "ME ASEDIAN SIN CESAR,",
+          "ENTONCES SIENTO",
+          "EL CALOR DE TUS ALAS,",
+          "QUE ME AMPARAN Y DAN SEGURIDAD."
+        ]
+      },
+      {
+        "type": "verse",
+        "number": 4,
+        "lines": [
+          "Y AL LLEGAR AL FIN DE ESTA JORNADA,",
+          "EN DONDE TODAS",
+          "MIS LUCHAS CESARÁN,",
+          "TU TORNARÁS MIS LÁGRIMAS EN GOZO,",
+          "EN ESA TIERNA MORADA CELESTIAL."
+        ]
+      }
+    ]
+  }
+]

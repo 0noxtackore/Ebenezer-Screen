@@ -1,0 +1,374 @@
+/* Contenedor de himnos a pantalla completa (el centrado lo maneja .parent-container interna) */
+#hymns-container {
+  position: relative;
+  width: 100%;
+  min-height: calc(100vh - 56px);
+  overflow: hidden;
+  z-index: 100;
+  font-family: 'Arial', sans-serif;
+  color: white;
+  box-sizing: border-box;
+}
+
+/* Fondo con textura y velo */
+#bg-layer-hymns {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://images.unsplash.com/photo-1508780709619-79562169bc64");
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.8) contrast(1.1);
+  z-index: -1;
+}
+
+#bg-layer-hymns::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(4px);
+  z-index: 1;
+}
+
+/* Título del himno y letras (ocultos mientras no haya himno) */
+#hymn-title,
+#hymn-lyrics {
+  display: none;
+}
+
+/* Estilo base del título (cuando se muestre) */
+#hymn-title {
+  margin-top: 0;
+  font-family: 'Impact', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  letter-spacing: 1.5px;
+  padding: 0;
+  border-bottom: none;
+  text-shadow: 2px 2px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+/* Cuando ya hay himno cargado: mostrar título con línea decorativa */
+#hymns-container.hymns-container--results #hymn-title {
+  margin-top: 0;
+  padding: 0 0 1rem 0;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Contenedor de letras */
+#hymns-container.hymns-container--results #hymn-lyrics {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  max-width: none;
+  padding: 2.5rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  margin-top: 0.5rem;
+  z-index: 10;
+  line-height: 1.8;
+  position: relative;
+}
+
+/* Contenedor interno del texto del himno, para separarlo de las flechas */
+#hymn-lyrics-content {
+  width: 70%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 1024px) {
+  #hymn-lyrics-content {
+    width: 80%;
+  }
+}
+
+@media (max-width: 768px) {
+  #hymn-lyrics-content {
+    width: 88%;
+  }
+}
+
+/* Secciones */
+.hymn-section {
+  margin-bottom: 2.5rem;
+  min-height: 60vh;
+  text-align: center;
+}
+
+/* Etiquetas de verso */
+.hymn-verse-label {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 700;
+  color: white;
+  background: rgba(0,0,0,0.05);
+  padding: 0.4rem 1rem;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+/* Etiqueta de coro */
+.hymn-chorus-label {
+  font-size: 2.4rem; /* CORO más grande */
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  color: #ffffff;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+}
+
+/* Línea de himno */
+.hymn-line {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  margin: 0.4rem 0;
+  transition: color 0.3s ease;
+  text-shadow: 1px 1px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000;
+}
+
+/* Ocultar scroll */
+.hymn-section {
+  min-height: 40vh;
+}
+
+/* Karaoke Styles */
+.hymn-word {
+  display: inline;
+  transition: all 0.3s ease;
+}
+
+/* Palabra resaltada */
+.hymn-word.word-matched {
+  color: #ffd700;
+  transition: color 0.1s ease;
+}
+
+/* Línea activa */
+.hymn-line.active-line {
+  color: red;
+  background: transparent;
+  box-shadow: none;
+  transition: all 0.3s ease;
+}
+
+.hymn-line.active-line .hymn-word {
+  display: inline-block;
+  animation: bounce 0.5s infinite;
+}
+
+@media (min-width: 1920px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+
+  #hymns-stage {
+    width: 100vw;   /* ocupa todo el ancho de la ventana */
+    margin: 0;      /* elimina márgenes */
+    padding: 0;     /* elimina padding extra */
+    box-sizing: border-box;
+  }
+
+  #hymn-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10rem;
+    padding: 0.5rem 6rem 1rem;
+    text-align: center;
+    width: 100vw;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  }
+
+  .hymn-verse-label {
+    font-size: 5.5rem;
+  }
+
+  .hymn-chorus-label {
+    font-size: 5rem;
+  }
+
+  .hymn-line {
+    font-size: 4.2rem;
+  }
+
+  /* En pantallas muy grandes, ocultar flechas y atajo de estrofa/coro */
+  .hymn-carousel-controls,
+  .hymn-carousel-button,
+  .hymn-shortcut {
+    display: none !important;
+  }
+
+  /* Asegurar que el fondo de himnos y el contenedor ocupen todo el alto */
+  #hymns-container,
+  #hymns-stage {
+    min-height: 100vh;
+  }
+
+  /* Hacer que el contenedor de letras aproveche más alto de pantalla */
+  #hymns-container.hymns-container--results #hymn-lyrics {
+    max-height: none;
+    height: calc(100vh - 190px);
+    padding: 1.5rem 3rem 2rem;
+    box-sizing: border-box;
+  }
+}
+
+@media (min-width: 3840px) {
+  #hymn-title {
+    font-size: 18rem;
+    padding: 1rem 9rem 1.6rem;
+  }
+
+  .hymn-verse-label {
+    font-size: 9rem;
+  }
+
+  .hymn-chorus-label {
+    font-size: 8rem;
+  }
+
+  .hymn-line {
+    font-size: 7.5rem;
+  }
+
+  #hymn-lyrics-content {
+    width: 90%;
+    max-width: none;
+  }
+}
+
+@media (min-width: 7680px) {
+  #hymn-title {
+    font-size: 28rem;
+    padding: 1.2rem 11rem 2.4rem;
+  }
+
+  .hymn-verse-label {
+    font-size: 28rem;
+  }
+
+  .hymn-chorus-label {
+    font-size: 24rem;
+  }
+
+  .hymn-line {
+    font-size: 16rem;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hymn-carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem; /* flechas más alejadas del texto en escritorio */
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hymn-carousel-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  pointer-events: auto;
+}
+
+.hymn-carousel-button:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Atajo inferior para ir a estrofa/coro */
+.hymn-shortcut {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  z-index: 20;
+}
+
+.hymn-shortcut__label {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.hymn-shortcut__input {
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+  min-width: 90px;
+  max-width: 120px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+}
+
+.hymn-shortcut__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .hymn-line {
+    font-size: 1.6rem;
+  }
+  .hymn-carousel-controls {
+    padding: 0 2rem; /* tablet: algo más alejadas pero dentro de la pantalla */
+  }
+}
+
+@media (max-width: 480px) {
+  .hymn-line {
+    font-size: 1.2rem;
+  }
+  .hymn-carousel-controls {
+    padding: 0 1.2rem; /* móvil: separadas pero sin salirse */
+  }
+}

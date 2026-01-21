@@ -1,0 +1,144 @@
+/* Contenedor principal de Especiales (canciones para el Señor) */
+#specials-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.background-specials {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: brightness(0.65) blur(1px);
+  transform: scale(1.03);
+}
+
+.background-specials::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.75) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.specials-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.specials-title {
+  font-family: 'Impact', sans-serif;
+  font-size: 3.2rem;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.5px #000;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+}
+
+.specials-subtitle {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 2px #000;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.9);
+  margin-bottom: 1.25rem;
+}
+
+.specials-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1.7;
+  max-width: 80%;
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.8px #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
+  text-transform: uppercase;
+}
+
+@media (min-width: 1920px) {
+  .specials-title {
+    font-size: 10rem;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  }
+
+  .specials-subtitle {
+    font-size: 6rem;
+  }
+
+  .specials-text {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .specials-title {
+    font-size: 20rem;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  }
+
+  .specials-subtitle {
+    font-size: 10rem;
+  }
+
+  .specials-text {
+    font-size: 8rem;
+  }
+}
+
+@media (min-width: 7680px) {
+  .specials-title {
+    font-size: 30rem;
+  }
+
+  .specials-subtitle {
+    font-size: 18rem;
+  }
+
+  .specials-text {
+    font-size: 17rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .specials-stage {
+    padding: 2rem;
+  }
+
+  .specials-title {
+    font-size: 2.4rem;
+  }
+
+  .specials-text {
+    font-size: 1.4rem;
+    max-width: 90%;
+  }
+}

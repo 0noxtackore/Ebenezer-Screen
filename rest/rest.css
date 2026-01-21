@@ -1,0 +1,163 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 2s ease-in-out;
+    z-index: -2;
+    will-change: background-image;
+    filter: blur(1px);
+    transform: scale(1.02);
+}
+
+/* EFECTO VINYETA: Spotlight Cinematic */
+.background::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.6;
+    /* El OVERLAY_ALPHA que tenías */
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    perspective: 1000px;
+    /* Necesario para el efecto 3D de moneda */
+    content-visibility: auto;
+    contain-intrinsic-size: 100vh;
+    animation: smoothReveal 0.8s ease-out forwards;
+}
+
+@keyframes smoothReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación del Logo */
+.logo-animation {
+    width: 70vw;
+    /* 85% del alto aprox */
+    max-height: 85vh;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    /* Aplicamos los dos efectos: Giro en Y y Latido */
+    animation:
+        girarMoneda 8s linear infinite,
+        latidoCorazon 3s ease-in-out infinite;
+
+    /* MASCARADO ESTÉTICO: Reduce pixelación con un toque casi imperceptible */
+    filter: blur(0.4px) drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+    will-change: filter, transform;
+}
+
+/* El Gradiente detrás del logo */
+.gradient-effect {
+    position: absolute;
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+    z-index: 1;
+    opacity: 0.8;
+    /* 100% opacidad como pediste */
+    mix-blend-mode: screen;
+    mix-blend-mode: screen;
+    /* Para que brille sobre el fondo */
+    animation:
+        girarMoneda 8s linear infinite,
+        latidoSuave 4s ease-in-out infinite;
+}
+
+/* Escalado específico para 4K (3840x2160+) */
+@media (min-width: 3840px) {
+    .logo-animation {
+        width: 50vw;
+        max-height: 65vh;
+    }
+
+    .gradient-effect {
+        width: 50%;
+    }
+}
+
+/* Escalado específico para 8K (7680x4320+) */
+@media (min-width: 7680px) {
+    .logo-animation {
+        width: 40vw;
+        max-height: 55vh;
+    }
+
+    .gradient-effect {
+        width: 40%;
+    }
+}
+
+/* EFECTOS */
+@keyframes girarMoneda {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes latidoCorazon {
+
+    0%,
+    100% {
+        scale: 1;
+    }
+
+    50% {
+        scale: 1.06;
+    }
+
+    /* El HEARTBEAT_AMPLITUDE */
+}
+
+@keyframes latidoSuave {
+
+    0%,
+    100% {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.95;
+        transform: scale(1.02);
+    }
+}

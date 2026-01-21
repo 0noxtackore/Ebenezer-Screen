@@ -1,0 +1,424 @@
+.messages-container {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* asegurar que el fondo cubre toda la pantalla */
+  overflow: hidden;
+  z-index: 100;
+  animation: smoothRevealMessage 0.7s ease-out forwards;
+}
+
+@keyframes smoothRevealMessage {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.background-messages {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  filter: brightness(0.5) blur(1px);
+  transform: scale(1.02);
+  will-change: opacity, transform;
+}
+
+/* EFECTO VINYETA: Spotlight Cinematic */
+.background-messages::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.5) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.messages-stage {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.message-title {
+  font-family: "Impact", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  /* Estilo Tinta Impresa: Blanco con borde negro */
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.5px #000;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.message-text {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  /* Texto balanceado para lectura prolongada */
+  line-height: 1.5;
+  max-width: 90%;
+  text-transform: uppercase;
+  font-weight: 700;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 1.5rem;
+
+  /* Estilo Tinta Impresa: Blanco con borde negro */
+  color: #fff;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 0.8px #000;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+@media (max-width: 768px) {
+  .message-text {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-text {
+    font-size: 1.1rem;
+    line-height: 1.4;
+    max-width: 96%;
+  }
+}
+
+.message-text.message-text--fullheight {
+  max-height: none;
+  overflow-y: visible;
+}
+
+@media (min-width: 1920px) {
+  .messages-stage {
+    padding: 1rem 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .message-title {
+    font-size: 14rem;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  }
+
+  .message-text {
+    font-size: 3rem;
+    line-height: 1.6;
+    max-width: 100%;
+    max-height: 100vh;
+    padding: 2rem 3rem;
+  }
+
+  /* Párrafos de poco texto (normales): letras aún más grandes */
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 3.4rem;
+  }
+
+  /* Párrafos abundantes (compactos): letras un poco más pequeñas */
+  .message-paragraph--compact .word {
+    font-size: 2.9rem;
+  }
+
+  /* En pantallas muy grandes, ocultar flechas y atajo de párrafos */
+  .message-carousel-controls,
+  .message-carousel-button,
+  .message-shortcut {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1920px) {
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 3.4rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 2.9rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .messages-stage {
+    padding: 1.5rem 4rem;
+    justify-content: center;
+  }
+
+  .message-title {
+    font-size: 26rem;
+  }
+
+  .message-text {
+    font-size: 5rem;
+    line-height: 1.6;
+    max-width: 100%;
+    max-height: 100vh;
+    padding: 2rem 3rem;
+  }
+
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 7rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 5.5rem;
+  }
+}
+
+@media (min-width: 7680px) {
+  .messages-stage {
+    padding: 2rem 5rem;
+    justify-content: center;
+  }
+
+  .message-title {
+    font-size: 52rem;
+  }
+
+  .message-text {
+    font-size: 24rem;
+    line-height: 0.8;
+    max-width: 100%;
+    max-height: 100vh;
+    padding: 2rem 3rem;
+  }
+
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 10rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 8.5rem;
+  }
+}
+
+/* Scrollbar personalizado para los mensajes largos */
+.message-text::-webkit-scrollbar {
+  width: 8px;
+}
+
+.message-text::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.message-text::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+/* KARAOKE & TRACKING */
+.word {
+  display: inline-block;
+  padding: 0 2px;
+  transition: all 0.3s ease;
+}
+
+.word-matched {
+  color: #ffc107;
+  /* Ámbar/Dorado para resaltar sobre el negro */
+  text-shadow: 0 0 10px rgba(255, 193, 7, 0.6);
+  transform: scale(1.05);
+}
+
+.message-paragraph {
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  transition: background 0.5s ease;
+  position: relative;
+}
+
+/* Párrafos muy largos: texto un poco más pequeño para que quepan mejor */
+.message-paragraph--compact .word {
+  font-size: 1.3rem;
+}
+
+@media (max-width: 480px) {
+  .message-paragraph--compact .word {
+    font-size: 1rem;
+  }
+}
+
+.paragraph-active {
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.03);
+}
+
+.paragraph-num-label {
+  color: #ff3d00;
+  /* Rojo más vibrante */
+  font-weight: 900;
+  margin-right: 15px;
+  display: inline-block;
+  font-size: 1.4rem;
+  vertical-align: top;
+  border-right: 2px solid rgba(255, 255, 255, 0.2);
+  padding-right: 10px;
+}
+
+/* Carrusel de mensajes: flechas laterales */
+.message-carousel-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.message-carousel-button {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.message-carousel-button:hover {
+  background: rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Atajo inferior para ir a párrafo de mensaje */
+.message-shortcut {
+  position: fixed;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(0, 0, 0, 0.55);
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  z-index: 20;
+}
+
+@media (max-width: 480px) {
+  .message-shortcut {
+    bottom: 3.5rem; /* un poco más arriba en móviles */
+  }
+}
+
+.message-shortcut__label {
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.message-shortcut__input {
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.9rem;
+  min-width: 90px;
+  max-width: 120px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+}
+
+.message-shortcut__input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .message-carousel-controls {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-carousel-controls {
+    padding: 0 1.2rem;
+  }
+}
+
+/* Overrides finales para pantallas grandes: asegurar tamaños gigantes de texto */
+@media (min-width: 1920px) {
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 3.4rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 2.9rem;
+  }
+}
+
+@media (min-width: 3840px) {
+  .messages-stage {
+    padding: 1.5rem 4rem;
+    justify-content: center;
+  }
+
+  .message-title {
+    font-size: 26rem;
+  }
+
+  .message-text {
+    font-size: 5rem;
+    line-height: 1.6;
+  }
+
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 7rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 5.5rem;
+  }
+}
+
+@media (min-width: 7680px) {
+  .messages-stage {
+    padding: 2rem 5rem;
+    justify-content: center;
+  }
+
+  .message-title {
+    font-size: 52rem;
+  }
+
+  .message-text {
+    font-size: 24rem;
+    line-height: 0.8;
+  }
+
+  .message-paragraph:not(.message-paragraph--compact) .word {
+    font-size: 10rem;
+  }
+
+  .message-paragraph--compact .word {
+    font-size: 8.5rem;
+  }
+}

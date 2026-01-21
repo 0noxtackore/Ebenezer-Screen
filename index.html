@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabernáculo Ebenezer</title>
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="rest/rest.css">
+    <link rel="stylesheet" href="hymns/song.css">
+    <link rel="stylesheet" href="speaker/speak.css">
+    <link rel="stylesheet" href="bible/bible.css">
+    <link rel="stylesheet" href="goodbye/goodbye.css">
+    <link rel="stylesheet" href="prayer/prayer.css">
+    <link rel="stylesheet" href="messages/message.css">
+    <link rel="stylesheet" href="class/class.css">
+    <link rel="stylesheet" href="specials/specials.css">
+    <link rel="stylesheet" href="search/search.css">
+</head>
+
+<body>
+    <nav class="main-menu">
+        <button class="main-menu__toggle" type="button" aria-label="Abrir o cerrar menú de navegación">
+            <svg class="main-menu__toggle-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="6" width="18" height="2" rx="1" fill="#f5f5f5" />
+                <rect x="3" y="11" width="18" height="2" rx="1" fill="#f5f5f5" />
+                <rect x="3" y="16" width="18" height="2" rx="1" fill="#f5f5f5" />
+            </svg>
+        </button>
+        <div class="main-menu__items">
+            <button class="main-menu__item main-menu__item--active" data-section="home">1-Inicio</button>
+            <button class="main-menu__item" data-section="voice">2-Voz</button>
+            <button class="main-menu__item" data-section="bible">3-Biblia</button>
+            <button class="main-menu__item" data-section="hymns">4-Himnos</button>
+            <button class="main-menu__item" data-section="messages">5-Mensajes</button>
+            <button class="main-menu__item" data-section="class">6-Clase Bíblica</button>
+            <button class="main-menu__item" data-section="specials">7-Especiales</button>
+            <button class="main-menu__item" data-section="prayer">8-Oración</button>
+            <button class="main-menu__item" data-section="goodbye">9-Despedida</button>
+        </div>
+    </nav>
+
+    <div id="bg-layer" class="background"></div>
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="rest-container" class="main-container">
+        <img src="img/gradient.png" id="gradient" class="gradient-effect" loading="lazy">
+        <img src="img/logo.png" id="logo" class="logo-animation" loading="lazy">
+    </div>
+
+    <div id="voice-container" class="voice-container form-hidden"
+        style="content-visibility: auto; contain-intrinsic-size: 100vh;">
+        <div id="bg-layer-voice" class="background-voice"></div>
+
+        <!-- Switch para modo de fondo de voz (ON = nuevos fondos, OFF = fondos clásicos) -->
+        <button id="voice-bg-switch" class="voice-bg-switch" type="button" aria-label="Cambiar fondos de voz">
+            <span class="voice-bg-switch__label">Modo Predicador</span>
+            <span class="voice-bg-switch__toggle">
+                <span class="voice-bg-switch__knob"></span>
+            </span>
+        </button>
+
+        <div id="voice-subtitles" class="voice-subtitles"></div>
+    </div>
+
+    <section id="bible-container" class="bible-container form-hidden"
+        style="content-visibility: auto; contain-intrinsic-size: 100vh;">
+        <div id="bg-layer-bible" class="background-bible"></div>
+
+        <div class="bible-stage parent-container">
+            <!-- Barra de pestañas para pasajes de Biblia (como navegador) -->
+            <div id="bible-tabs" class="bible-tabs"></div>
+            <form id="bible-search-form" class="search-form">
+                <div class="search-form__wrapper">
+                    <img src="img/logo.png" alt="Logo" class="search-form__logo">
+                    <input id="bible-search-input" class="search-form__input" type="text"
+                        placeholder="Ej: Génesis 1 1 o Juan 3:16">
+                    <button type="submit" class="search-form__icon-button" aria-label="Buscar pasaje">
+                        <svg class="search-form__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="11" cy="11" r="6" stroke="#f5f5f5" stroke-width="2" fill="none" />
+                            <line x1="16" y1="16" x2="21" y2="21" stroke="#f5f5f5" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="bible-suggestions-panel" class="search-suggestions search-suggestions--hidden">
+                    <ul id="bible-suggestions-list" class="search-suggestions__list"></ul>
+                </div>
+            </form>
+
+            <div class="header">
+                <div id="bible-title" class="title"></div>
+            </div>
+            <div id="bible-verse" class="verse"></div>
+            <!-- Navegación móvil de versículos -->
+            <div id="bible-mobile-nav" class="bible-mobile-nav">
+                <button id="bible-mobile-prev" class="bible-mobile-nav__button" type="button">Atrás</button>
+                <button id="bible-mobile-next" class="bible-mobile-nav__button" type="button">Siguiente</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="hymns-container" class="hymns-container form-hidden">
+        <div id="bg-layer-hymns" class="background-hymns"></div>
+        <div class="parent-container" id="hymns-stage">
+            <div id="hymn-tabs" class="bible-tabs"></div>
+            <form id="hymn-search-form" class="search-form">
+                <div class="search-form__wrapper">
+                    <img src="img/logo.png" alt="Logo" class="search-form__logo">
+                    <input id="hymn-number-input" class="search-form__input" type="text"
+                        placeholder="Ej: 1, H1, H-1 o título del himno">
+                    <button type="submit" class="search-form__icon-button" aria-label="Buscar himno">
+                        <svg class="search-form__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="11" cy="11" r="6" stroke="#f5f5f5" stroke-width="2" fill="none" />
+                            <line x1="16" y1="16" x2="21" y2="21" stroke="#f5f5f5" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="hymn-suggestions-panel" class="search-suggestions search-suggestions--hidden">
+                    <ul id="hymn-suggestions-list" class="search-suggestions__list"></ul>
+                </div>
+            </form>
+
+            <div id="hymn-title" class="hymn-title"></div>
+            <div id="hymn-lyrics" class="hymn-lyrics"></div>
+        </div>
+    </section>
+
+    <section id="messages-container" class="messages-container form-hidden">
+        <div id="bg-layer-messages" class="background-messages"></div>
+        <div class="messages-stage parent-container" id="messages-stage">
+            <div id="message-tabs" class="bible-tabs"></div>
+            <form id="message-search-form" class="search-form">
+                <div class="search-form__wrapper">
+                    <img src="img/logo.png" alt="Logo" class="search-form__logo">
+                    <input id="message-search-input" class="search-form__input" type="text" placeholder="Buscar mensaje (título o tema)">
+                    <button type="button" id="message-search-button" class="search-form__icon-button" aria-label="Buscar mensaje">
+                        <svg class="search-form__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <circle cx="11" cy="11" r="6" stroke="#f5f5f5" stroke-width="2" fill="none" />
+                            <line x1="16" y1="16" x2="21" y2="21" stroke="#f5f5f5" stroke-width="2" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </div>
+                <div id="message-suggestions-panel" class="search-suggestions search-suggestions--hidden">
+                    <ul id="message-suggestions-list" class="search-suggestions__list"></ul>
+                </div>
+            </form>
+
+            <div id="message-title" class="message-title"></div>
+            <div id="message-text" class="message-text"></div>
+        </div>
+    </section>
+
+    <section id="class-container" class="class-container form-hidden">
+        <div id="bg-layer-class" class="background-class"></div>
+        <div class="class-stage" id="class-stage">
+            <div class="class-title" id="class-title">CLASE BÍBLICA</div>
+            <div class="class-ref" id="class-ref"></div>
+            <div class="class-text" id="class-text"></div>
+        </div>
+    </section>
+
+    <section id="specials-container" class="specials-container form-hidden">
+        <div id="bg-layer-specials" class="background-specials"></div>
+        <div class="specials-stage" id="specials-stage">
+            <div class="specials-title" id="specials-title">ESPECIALES</div>
+            <div class="specials-subtitle" id="specials-subtitle"></div>
+            <div class="specials-text" id="specials-text"></div>
+        </div>
+    </section>
+
+    <section id="prayer-container" class="prayer-container form-hidden">
+        <div id="bg-layer-prayer" class="background-prayer"></div>
+        <div class="prayer-stage" id="prayer-stage">
+            <div class="prayer-title">MOMENTO DE ORACIÓN</div>
+            <div class="prayer-ref" id="prayer-ref"></div>
+            <div class="prayer-text" id="prayer-text"></div>
+        </div>
+    </section>
+
+    <section id="goodbye-container" class="goodbye-container form-hidden">
+        <div id="bg-layer-goodbye" class="background-goodbye"></div>
+        <div id="goodbye-stage" class="stage">
+            <div class="title">DESPEDIDA</div>
+            <div id="goodbye-ref" class="ref"></div>
+            <div id="goodbye-text" class="text"></div>
+        </div>
+    </section>
+
+    <!-- Barra inferior exclusiva para móviles -->
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
+        <button class="mobile-bottom-nav__item" data-section="home" aria-label="Inicio">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4z"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="voice" aria-label="Voz">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-soundwave" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8.5 2a.5.5 0 0 1 .5.5v11a.5.5 0 0 1-1 0v-11a.5.5 0 0 1 .5-.5m-2 2a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m4 0a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5m-6 1.5A.5.5 0 0 1 5 6v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m8 0a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m-10 1A.5.5 0 0 1 3 7v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5m12 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0V7a.5.5 0 0 1 .5-.5"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="bible" aria-label="Biblia">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-book" viewBox="0 0 16 16">
+                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="hymns" aria-label="Himnos">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-music-note-beamed" viewBox="0 0 16 16">
+                <path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13s1.12-2 2.5-2 2.5.896 2.5 2m9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2"/>
+                <path fill-rule="evenodd" d="M14 11V2h1v9zM6 3v10H5V3z"/>
+                <path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4z"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="messages" aria-label="Mensajes">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-square-quote" viewBox="0 0 16 16">
+                <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-2.5a2 2 0 0 0-1.6.8L8 14.333 6.1 11.8a2 2 0 0 0-1.6-.8H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                <path d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="class" aria-label="Clase">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-bookmark" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/>
+                <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+            </svg>
+        </button>
+        
+        <button class="mobile-bottom-nav__item" data-section="specials" aria-label="Especiales">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-mic" viewBox="0 0 16 16">
+                <path d="M3.5 6.5A.5.5 0 0 1 4 7v1a4 4 0 0 0 8 0V7a.5.5 0 0 1 1 0v1a5 5 0 0 1-4.5 4.975V15h3a.5.5 0 0 1 0 1h-7a.5.5 0 0 1 0-1h3v-2.025A5 5 0 0 1 3 8V7a.5.5 0 0 1 .5-.5"/>
+                <path d="M10 8a2 2 0 1 1-4 0V3a2 2 0 1 1 4 0zM8 0a3 3 0 0 0-3 3v5a3 3 0 0 0 6 0V3a3 3 0 0 0-3-3"/>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="prayer" aria-label="Oración">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16" height="16" viewBox="0 0 826 1280"
+              aria-hidden="true" focusable="false">
+              <g transform="translate(0,1280) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+                <path d="M668 12781 c-82 -26 -144 -66 -179 -114 -63 -85 -78 -152 -89 -399
+                -11 -222 -16 -248 -73 -341 -59 -98 -69 -181 -41 -360 39 -254 39 -254 -22
+                -328 -159 -191 -228 -610 -179 -1085 21 -204 46 -317 109 -489 32 -86 31 -97
+                -34 -415 -164 -791 -196 -1175 -124 -1468 31 -125 111 -270 310 -552 223 -318
+                322 -510 358 -695 9 -44 27 -164 41 -268 85 -634 258 -1212 575 -1919 l52
+                -117 -125 -208 c-146 -244 -241 -430 -325 -638 -152 -378 -197 -632 -189
+                -1075 3 -194 9 -286 25 -385 121 -746 491 -1331 995 -1575 103 -49 263 -102
+                392 -130 156 -34 440 -39 604 -11 647 110 1186 605 1449 1331 39 108 95 292
+                122 405 52 215 66 301 86 537 3 36 12 74 19 85 13 17 19 13 88 -57 95 -97 240
+                -293 344 -464 l82 -136 -40 -212 c-77 -408 -121 -644 -150 -807 l-29 -165 21
+                -23 c12 -12 178 -102 368 -200 858 -440 1001 -497 1251 -498 129 0 195 18 230
+                62 32 40 63 155 150 544 287 1287 527 2075 810 2666 163 340 428 741 632 958
+                l76 81 -46 17 c-26 10 -189 67 -362 128 -173 61 -370 130 -438 154 -180 66
+                -247 79 -392 80 -140 0 -185 -9 -338 -66 -56 -22 -118 -39 -137 -39 -77 0
+                -262 119 -340 217 -75 96 -86 139 -185 718 -88 510 -154 813 -255 1161 -64
+                220 -89 371 -125 745 -49 506 -125 722 -480 1364 -133 240 -299 567 -368 725
+                -132 302 -263 799 -291 1102 -13 138 -27 170 -80 191 -120 48 -310 -15 -452
+                -150 -90 -86 -114 -92 -163 -39 -17 18 -56 77 -86 130 -107 192 -219 304 -640
+                646 -398 324 -568 473 -840 736 -243 235 -344 309 -492 358 -147 50 -221 34
+                -319 -66 l-68 -70 -29 20 c-15 11 -88 84 -161 162 -232 244 -336 294 -503 241z
+                m190 -224 c110 -51 253 -218 496 -577 176 -260 272 -392 354 -490 30 -36 234
+                -243 452 -460 410 -407 501 -509 635 -715 140 -214 231 -390 599 -1149 111
+                -229 172 -334 266 -461 113 -151 221 -241 339 -285 96 -37 95 1 -4 130 -243
+                314 -391 576 -580 1020 -267 628 -395 810 -1025 1462 -529 547 -805 876 -896
+                1073 -34 71 -31 97 13 135 45 40 148 90 185 90 38 0 147 -85 368 -287 297
+                -271 480 -433 725 -641 447 -380 599 -527 734 -707 147 -196 218 -345 364
+                -765 99 -284 136 -377 218 -548 178 -372 419 -715 622 -884 106 -88 107 -65 5
+                111 -161 277 -197 342 -313 572 -187 372 -312 660 -418 965 -91 263 -86 293
+                65 410 148 115 256 126 293 29 4 -11 11 -67 15 -125 22 -273 130 -751 235
+                -1036 55 -148 186 -413 325 -654 395 -687 474 -921 500 -1480 18 -376 29 -434
+                132 -695 66 -166 127 -342 169 -490 68 -239 166 -764 189 -1015 28 -305 37
+                -335 117 -422 26 -28 99 -84 161 -124 61 -40 112 -79 112 -85 0 -14 -42 -63
+                -225 -264 -463 -510 -814 -1107 -1011 -1724 -42 -133 -81 -221 -98 -221 -18 0
+                -45 33 -119 145 -77 116 -239 322 -356 449 -132 144 -173 174 -596 452 -304
+                198 -667 558 -957 948 -178 238 -317 463 -451 732 -167 333 -218 483 -388
+                1129 -121 460 -252 827 -701 1965 -312 789 -388 1025 -532 1640 -104 442 -120
+                553 -92 637 9 27 30 62 46 78 27 26 31 27 60 15 60 -25 118 -112 350 -525 299
+                -532 340 -615 440 -910 134 -395 269 -663 469 -929 131 -174 277 -314 302
+                -289 9 9 -64 173 -276 613 -144 301 -252 536 -332 725 -30 72 -82 195 -116
+                275 -136 321 -397 813 -550 1039 -145 213 -236 281 -384 289 -79 5 -136 -9
+                -171 -42 -57 -51 -98 -181 -108 -337 -8 -145 -19 -179 -74 -244 -27 -32 -52
+                -71 -55 -87 -9 -37 -52 -88 -76 -88 -41 0 -55 75 -70 378 -10 189 -10 278 0
+                414 24 350 83 484 158 361 16 -26 44 -82 62 -123 40 -92 79 -160 91 -160 36 0
+                10 447 -44 755 -30 168 -28 225 7 247 35 22 159 -11 257 -68 64 -37 156 -130
+                222 -224 25 -36 101 -157 168 -270 236 -395 347 -548 626 -865 348 -394 489
+                -595 649 -920 57 -115 149 -322 204 -458 213 -525 385 -867 437 -867 7 0 14 3
+                14 8 0 33 -182 614 -305 972 -162 475 -304 753 -534 1050 -36 47 -151 189
+                -256 315 -364 438 -473 585 -665 900 -245 401 -323 492 -482 569 -51 24 -138
+                56 -193 69 -130 33 -134 35 -141 64 -9 33 13 248 32 321 16 59 52 129 78 151
+                53 45 150 48 234 8z m-308 -2579 c74 -286 731 -2068 938 -2543 150 -346 173
+                -412 158 -470 -10 -40 -48 -33 -89 18 -72 88 -205 316 -358 611 -123 240 -205
+                422 -284 631 -37 99 -78 197 -92 218 -21 33 -26 37 -40 26 -13 -11 -14 -33
+                -10 -134 9 -222 71 -395 283 -785 67 -124 174 -331 239 -460 l117 -235 -81
+                -128 c-69 -111 -121 -216 -121 -247 0 -21 23 -20 63 3 23 13 103 61 177 106
+                75 45 164 91 199 102 87 27 102 17 135 -94 30 -97 75 -280 106 -427 12 -58 42
+                -188 67 -290 246 -1009 826 -1972 1533 -2543 30 -24 120 -90 200 -147 170
+                -120 202 -148 226 -202 16 -35 16 -46 5 -100 -13 -65 -80 -224 -137 -325 -56
+                -101 -150 -221 -263 -337 -179 -182 -323 -290 -515 -382 -167 -80 -237 -96
+                -436 -97 -254 -1 -339 30 -487 178 -66 68 -90 99 -127 176 -62 128 -87 241
+                -88 388 0 151 25 258 93 393 73 147 83 194 75 363 -14 310 -62 432 -284 727
+                -60 80 -144 207 -187 282 -212 377 -472 1013 -576 1414 -34 133 -81 394 -109
+                615 -66 512 -164 756 -471 1179 -45 62 -97 141 -116 175 -114 207 -109 704 13
+                1312 19 95 59 320 89 500 76 450 105 571 135 571 5 0 14 -19 20 -42z"/>
+              </g>
+            </svg>
+        </button>
+        <button class="mobile-bottom-nav__item" data-section="goodbye" aria-label="Despedida">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-raised-hand" viewBox="0 0 16 16">
+                <path d="M6 6.207v9.043a.75.75 0 0 0 1.5 0V10.5a.5.5 0 0 1 1 0v4.75a.75.75 0 0 0 1.5 0v-8.5a.25.25 0 1 1 .5 0v2.5a.75.75 0 0 0 1.5 0V6.5a3 3 0 0 0-3-3H6.236a1 1 0 0 1-.447-.106l-.33-.165A.83.83 0 0 1 5 2.488V.75a.75.75 0 0 0-1.5 0v2.083c0 .715.404 1.37 1.044 1.689L5.5 5c.32.32.5.754.5 1.207"/>
+                <path d="M8 3a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+            </svg>
+        </button>
+    </nav>
+
+    <script src="rest/rest.js"></script>
+    <script src="hymns/song.js"></script>
+    <script src="speaker/speak.js"></script>
+    <script src="bible/bible.js"></script>
+    <script src="goodbye/goodbye.js"></script>
+    <script src="prayer/prayer.js"></script>
+    <script src="messages/message.js"></script>
+    <script src="class/class.js"></script>
+    <script src="specials/specials.js"></script>
+    <script src="navigation.js"></script>
+
+</body>
+
+</html>
