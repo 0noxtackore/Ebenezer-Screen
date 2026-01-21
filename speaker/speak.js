@@ -12,16 +12,8 @@
     const voiceBgSwitch = document.getElementById('voice-bg-switch');
 
     let hasSpoken = false;
-    let audioContext = null;
-    let scriptProcessor = null;
-    let mediaStream = null;
     let recognitionNative = null;
     let voiceActive = false;
-
-    // --- ESTADO DE VOLUMEN ---
-    let currentVolume = 0;
-    let isShouting = false;
-    const SHOUT_THRESHOLD = 0.15;
 
     // --- PALABRAS SANTAS ---
     const HOLY_WORDS = [
@@ -78,18 +70,13 @@
             const upper = w.toUpperCase().replace(/[.,;!?]/g, '');
             let classes = [];
 
-            // Si está gritando, priorizamos estilo de grito
-            if (isShouting) {
-                classes.push('voice-shout');
-            }
-
             // Palabras santas siempre con su estilo especial
             if (HOLY_WORDS.includes(upper)) {
                 return `<span class="voice-holy">${w}</span>`;
             }
 
             // Algunas palabras normales se pintan con colores suaves aleatorios SOLO en resultados finales
-            if (!isShouting && isFinal) {
+            if (isFinal) {
                 const rnd = Math.random();
                 if (rnd < 0.45) { // ~45% de las palabras finales
                     const variant = Math.floor(Math.random() * 3) + 1; // 1,2,3
@@ -153,45 +140,6 @@
         };
 
         try { recognitionNative.start(); } catch (e) { }
-        if (!audioContext) initAudioProcessor(true);
-    }
-
-    function calculateVolume(buffer) {
-        let sum = 0;
-        for (let i = 0; i < buffer.length; i++) {
-            sum += buffer[i] * buffer[i];
-        }
-        return Math.sqrt(sum / buffer.length);
-    }
-
-    async function initAudioProcessor(meteringOnly = true) {
-        if (!voiceActive) return;
-        try {
-            const stream = await navigator.mediaDevices.getUserMedia({
-                audio: {
-                    echoCancellation: true,
-                    noiseSuppression: true,
-                    autoGainControl: true
-                }
-            });
-            mediaStream = stream;
-            audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const source = audioContext.createMediaStreamSource(stream);
-            scriptProcessor = audioContext.createScriptProcessor(4096, 1, 1);
-
-            source.connect(scriptProcessor);
-            scriptProcessor.connect(audioContext.destination);
-
-            scriptProcessor.onaudioprocess = (e) => {
-                const left = e.inputBuffer.getChannelData(0);
-                const vol = calculateVolume(left);
-                currentVolume = vol;
-                isShouting = vol > SHOUT_THRESHOLD;
-            };
-
-        } catch (e) {
-            console.error("Error micrófono:", e);
-        }
     }
 
     function startVoiceRecognition() {
@@ -211,23 +159,6 @@
                 recognitionNative.stop();
             } catch (e) { }
             recognitionNative = null;
-        }
-
-        if (scriptProcessor) {
-            try { scriptProcessor.disconnect(); } catch (e) { }
-            scriptProcessor = null;
-        }
-
-        if (audioContext) {
-            try { audioContext.close(); } catch (e) { }
-            audioContext = null;
-        }
-
-        if (mediaStream) {
-            try {
-                mediaStream.getTracks().forEach(t => t.stop());
-            } catch (e) { }
-            mediaStream = null;
         }
     }
 
@@ -256,6 +187,11 @@
     function setRandomNatureBackground() {
         const bgVoice = document.getElementById('bg-layer-voice');
         if (!bgVoice) return;
+
+        // Solo cargar/cambiar fondo cuando la vista de voz está realmente visible
+        if (!voiceForm || voiceForm.classList.contains('form-hidden')) {
+            return;
+        }
 
         const sourceArray = useNewVoiceBackgrounds ? VOICE_BACKGROUNDS_NEW : VOICE_BACKGROUNDS_CLASSIC;
         const random = sourceArray[Math.floor(Math.random() * sourceArray.length)];
@@ -286,6 +222,7 @@
         voiceBgSwitch.click();
     });
 
+    // Se llamará a setRandomNatureBackground solo cuando la vista de voz esté activa
     setRandomNatureBackground();
 
 })();

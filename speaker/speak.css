@@ -94,6 +94,13 @@ body {
         2px 0 0 #000,
         0 -2px 0 #000,
         0 2px 0 #000;
+
+    /* Mostrar como máximo 3 líneas de texto, recortando el resto */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 /* Switch para cambiar el modo de fondos de voz */
@@ -156,12 +163,20 @@ body {
     .voice-subtitles{
         font-size: 9rem;
     }
+
+    .voice-subtitles--info {
+        font-size: 2.4rem;
+    }
 }
 
 @media (min-width: 3840px) {
     .voice-subtitles {
         font-size: 18rem;
         max-width: 80%;
+    }
+
+    .voice-subtitles--info {
+        font-size: 4rem;
     }
 }
 
@@ -170,13 +185,17 @@ body {
         font-size: 30rem;
         max-width: 88%;
     }
+
+    .voice-subtitles--info {
+        font-size: 6rem;
+    }
 }
 
 /* Estado informativo cuando no hay voz o hay errores */
 .voice-subtitles--info {
     opacity: 0.8;
     font-style: italic;
-    font-size: 0.95rem;
+    font-size: 1.2rem;
 }
 
 /* Palabras resaltadas por importancia */
@@ -188,7 +207,6 @@ body {
 /* Palabras que representan gritos (más grandes y rojas) */
 .voice-word--shout {
     color: #ff4444;
-    font-size: 3.8rem;
 }
 
 /* Utilidad para ocultar formularios controlados por JS */
@@ -197,17 +215,6 @@ body {
 }
 
 /* Estilos Dinámicos de Texto */
-
-/* Grito: Rojo y Gigante */
-.voice-shout {
-    color: #ff0000;
-    font-size: 6rem;
-    /* Gigante */
-    font-weight: 900;
-    text-shadow: 4px 4px 0 #000;
-    animation: shake 0.5s ease-in-out infinite;
-    display: inline-block;
-}
 
 /* Palabras Santas: Amarillo */
 .voice-holy {

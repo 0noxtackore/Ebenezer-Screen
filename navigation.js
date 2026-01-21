@@ -204,6 +204,7 @@
         // Atajos de teclado 1-9 para cambiar de sección del menú
         // 1: Inicio, 2: Voz, 3: Biblia, 4: Himnos, 5: Mensajes,
         // 6: Clases, 7: Especiales, 8: Oración, 9: Despedida
+        // Además: tecla "t" abre una nueva pestaña interna solo cuando estamos en Biblia, Himnos o Mensajes.
         window.addEventListener('keydown', (e) => {
             // No interferir cuando el usuario está escribiendo en campos de texto
             const active = document.activeElement;
@@ -212,6 +213,43 @@
             }
 
             const key = e.key;
+
+            // Atajo: "t" crea una nueva pestaña interna SOLO si la sección activa es Biblia, Himnos o Mensajes
+            if ((key === 't' || key === 'T') && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                const activeItem = document.querySelector('.main-menu__item.main-menu__item--active');
+                const activeSection = activeItem ? activeItem.getAttribute('data-section') : null;
+
+                if (activeSection === 'bible') {
+                    const tabsEl = document.getElementById('bible-tabs');
+                    const addBtn = tabsEl ? tabsEl.querySelector('[data-add-tab="true"]') : null;
+                    if (addBtn && addBtn instanceof HTMLElement) {
+                        e.preventDefault();
+                        addBtn.click();
+                    }
+                    return;
+                }
+
+                if (activeSection === 'hymns') {
+                    const tabsEl = document.getElementById('hymn-tabs');
+                    const addBtn = tabsEl ? tabsEl.querySelector('[data-add-tab="true"]') : null;
+                    if (addBtn && addBtn instanceof HTMLElement) {
+                        e.preventDefault();
+                        addBtn.click();
+                    }
+                    return;
+                }
+
+                if (activeSection === 'messages') {
+                    const tabsEl = document.getElementById('message-tabs');
+                    const addBtn = tabsEl ? tabsEl.querySelector('[data-add-tab="true"]') : null;
+                    if (addBtn && addBtn instanceof HTMLElement) {
+                        e.preventDefault();
+                        addBtn.click();
+                    }
+                    return;
+                }
+            }
+
             if (!/^[1-9]$/.test(key)) return;
 
             const sectionMap = {

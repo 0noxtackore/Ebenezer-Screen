@@ -117,9 +117,12 @@ In addition to voice control, Ebenezer Screen supports keyboard shortcuts for fa
   - Keys to toggle preacher‑oriented / karaoke modes
   - Close / escape commands to return to a neutral view (for example, Rest)
 
+- **Utility**
+  - `t` – Open a new internal tab in the current Bible, Hymns or Messages module (when available)
+
 This allows the operator to drive the entire experience either hands‑free (voice) or with quick, low‑friction keyboard input.
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 - **Frontend**: HTML5, CSS3, vanilla JavaScript
   - Responsive layouts tuned for **1920p, 4K (3840×2160) and 8K (7680×4320)**
