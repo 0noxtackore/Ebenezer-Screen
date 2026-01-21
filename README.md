@@ -102,15 +102,15 @@ Keyboard shortcuts are also available (e.g. numeric keys to jump between section
 In addition to voice control, Ebenezer Screen supports keyboard shortcuts for fast navigation during a service:
 
 - **Global navigation**
-  - `1` – Bible
-  - `2` – Hymns
-  - `3` – Messages
-  - `4` – Search
-  - `5` – Class
-  - `6` – Prayer
+  - `1` – Rest
+  - `2` – Speak
+  - `3` – Bible
+  - `4` – Hymns
+  - `5` – Messages
+  - `6` – Class
   - `7` – Specials
-  - `8` – Rest
-  - `9` – Goodbye
+  - `8` – Prayer
+  - `9` – Goodbye 
 
 - **Within modules (where implemented)**
   - Arrow keys or dedicated keys to move between verses, paragraphs or hymn stanzas
