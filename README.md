@@ -119,6 +119,7 @@ In addition to voice control, Ebenezer Screen supports keyboard shortcuts for fa
 
 - **Utility**
   - `t` – Open a new internal tab in the current Bible, Hymns or Messages module (when available)
+  - `w` – Close the current internal tab in the Bible, Hymns or Messages module (when available)
 
 This allows the operator to drive the entire experience either hands‑free (voice) or with quick, low‑friction keyboard input.
 
