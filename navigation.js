@@ -250,6 +250,23 @@
                 }
             }
 
+            // Atajo: "w" cierra la pestaña activa de Biblia (equivalente a pulsar la "x" de la pestaña)
+            if ((key === 'w' || key === 'W') && !e.altKey && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                const activeItem = document.querySelector('.main-menu__item.main-menu__item--active');
+                const activeSection = activeItem ? activeItem.getAttribute('data-section') : null;
+
+                if (activeSection === 'bible') {
+                    const tabsEl = document.getElementById('bible-tabs');
+                    const activeTab = tabsEl ? tabsEl.querySelector('.bible-tab.bible-tab--active') : null;
+                    const closeBtn = activeTab ? activeTab.querySelector('[data-close-tab-id]') : null;
+                    if (closeBtn && closeBtn instanceof HTMLElement) {
+                        e.preventDefault();
+                        closeBtn.click();
+                    }
+                    return;
+                }
+            }
+
             if (!/^[1-9]$/.test(key)) return;
 
             const sectionMap = {
@@ -269,6 +286,12 @@
 
             e.preventDefault();
             showSection(targetSection);
+        });
+
+        // Optimización global de imágenes: carga diferida y decodificación asíncrona
+        document.querySelectorAll('img').forEach(img => {
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute('decoding', 'async');
         });
 
         // Estado inicial: Inicio

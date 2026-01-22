@@ -128,14 +128,15 @@ body {
   text-transform: uppercase;
 }
 
-@media (min-width: 1920px) {
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
   .goodbye-title,
   .goodbye-container .title {
-    font-size: 10rem;
+    font-size: 5rem;
   }
 
   .ref {
-    font-size: 6rem;
+    font-size: 2.4rem;
   }
 
   .text {

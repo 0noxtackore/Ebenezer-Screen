@@ -169,28 +169,14 @@ html {
   text-shadow: none;
 }
 
-@media (min-width: 1920px) {
-  /* Contenedor general: un poco más de respiro lateral */
-  .bible-stage {
-    padding: 2.5rem 3rem;
-  }
-
-  /* Encabezado (ej: GÉNESIS 1) muy grande y un poco más abajo */
-  .header {
-    font-size: 3rem;
-    margin-top: 2.5rem;
-  }
-
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
   .title {
-    font-size: 8rem;
+    font-size: 6rem;
   }
 
-  /* Versículos gigantes y centrados */
   .verse {
-    font-size: 5rem;
-    max-width: 95%;
-    min-height: 65vh;
-    max-height: 80vh;
+    font-size: 4rem;
   }
 }
 

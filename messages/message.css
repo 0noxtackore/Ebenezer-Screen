@@ -105,52 +105,25 @@
   overflow-y: visible;
 }
 
-@media (min-width: 1920px) {
-  .messages-stage {
-    padding: 1rem 2.5rem;
-    box-sizing: border-box;
-  }
-
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
   .message-title {
-    font-size: 14rem;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    font-size: 5.5rem;
   }
 
   .message-text {
     font-size: 3rem;
-    line-height: 1.6;
-    max-width: 100%;
-    max-height: 100vh;
-    padding: 2rem 3rem;
   }
 
-  /* Párrafos de poco texto (normales): letras aún más grandes */
   .message-paragraph:not(.message-paragraph--compact) .word {
-    font-size: 3.4rem;
-  }
-
-  /* Párrafos abundantes (compactos): letras un poco más pequeñas */
-  .message-paragraph--compact .word {
-    font-size: 2.9rem;
-  }
-
-  /* En pantallas muy grandes, ocultar flechas y atajo de párrafos */
-  .message-carousel-controls,
-  .message-carousel-button,
-  .message-shortcut {
-    display: none !important;
-  }
-}
-
-@media (min-width: 1920px) {
-  .message-paragraph:not(.message-paragraph--compact) .word {
-    font-size: 3.4rem;
+    font-size: 2.8rem;
   }
 
   .message-paragraph--compact .word {
-    font-size: 2.9rem;
+    font-size: 2.2rem;
   }
 }
+
 
 @media (min-width: 3840px) {
   .messages-stage {
@@ -361,17 +334,6 @@
 @media (max-width: 480px) {
   .message-carousel-controls {
     padding: 0 1.2rem;
-  }
-}
-
-/* Overrides finales para pantallas grandes: asegurar tamaños gigantes de texto */
-@media (min-width: 1920px) {
-  .message-paragraph:not(.message-paragraph--compact) .word {
-    font-size: 3.4rem;
-  }
-
-  .message-paragraph--compact .word {
-    font-size: 2.9rem;
   }
 }
 

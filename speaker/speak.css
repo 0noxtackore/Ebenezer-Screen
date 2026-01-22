@@ -155,20 +155,6 @@ body {
     transform: translateX(20px);
 }
 
-@media (min-width: 1920px) {
-    /* En pantallas muy grandes, ocultar el switch visualmente (atajo de teclado sigue funcionando) */
-    .voice-bg-switch {
-        display: none !important;
-    }
-    .voice-subtitles{
-        font-size: 9rem;
-    }
-
-    .voice-subtitles--info {
-        font-size: 2.4rem;
-    }
-}
-
 @media (min-width: 3840px) {
     .voice-subtitles {
         font-size: 18rem;
@@ -191,11 +177,21 @@ body {
     }
 }
 
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
+    .voice-subtitles {
+        font-size: 5rem;
+    }
+
+    .voice-subtitles--info {
+        font-size: 2rem;
+    }
+}
+
 /* Estado informativo cuando no hay voz o hay errores */
 .voice-subtitles--info {
     opacity: 0.8;
     font-style: italic;
-    font-size: 1.2rem;
 }
 
 /* Palabras resaltadas por importancia */

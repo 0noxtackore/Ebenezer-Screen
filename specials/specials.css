@@ -84,14 +84,14 @@
   text-transform: uppercase;
 }
 
-@media (min-width: 1920px) {
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
   .specials-title {
-    font-size: 10rem;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+    font-size: 5rem;
   }
 
   .specials-subtitle {
-    font-size: 6rem;
+    font-size: 2.4rem;
   }
 
   .specials-text {

@@ -174,62 +174,22 @@
   animation: bounce 0.5s infinite;
 }
 
-@media (min-width: 1920px) {
-  html, body {
-    margin: 0;
-    padding: 0;
-  }
-
-  #hymns-stage {
-    width: 100vw;   /* ocupa todo el ancho de la ventana */
-    margin: 0;      /* elimina márgenes */
-    padding: 0;     /* elimina padding extra */
-    box-sizing: border-box;
-  }
-
+/* Ajuste específico de texto para pantallas 1920x1080 (solo tipografía, no layout) */
+@media (min-width: 1920px) and (max-width: 3839px) {
   #hymn-title {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 10rem;
-    padding: 0.5rem 6rem 1rem;
-    text-align: center;
-    width: 100vw;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-  }
-
-  .hymn-verse-label {
-    font-size: 5.5rem;
-  }
-
-  .hymn-chorus-label {
     font-size: 5rem;
   }
 
+  .hymn-verse-label {
+    font-size: 4.5rem;
+  }
+
+  .hymn-chorus-label {
+    font-size: 4rem;
+  }
+
   .hymn-line {
-    font-size: 4.2rem;
-  }
-
-  /* En pantallas muy grandes, ocultar flechas y atajo de estrofa/coro */
-  .hymn-carousel-controls,
-  .hymn-carousel-button,
-  .hymn-shortcut {
-    display: none !important;
-  }
-
-  /* Asegurar que el fondo de himnos y el contenedor ocupen todo el alto */
-  #hymns-container,
-  #hymns-stage {
-    min-height: 100vh;
-  }
-
-  /* Hacer que el contenedor de letras aproveche más alto de pantalla */
-  #hymns-container.hymns-container--results #hymn-lyrics {
-    max-height: none;
-    height: calc(100vh - 190px);
-    padding: 1.5rem 3rem 2rem;
-    box-sizing: border-box;
+    font-size: 3rem;
   }
 }
 
@@ -362,6 +322,15 @@
   .hymn-carousel-controls {
     padding: 0 2rem; /* tablet: algo más alejadas pero dentro de la pantalla */
   }
+  #hymn-lyrics-content {
+    width: 88%;
+  }
+
+  /* En móviles medianos permitir que el título se adapte mejor al ancho */
+  #hymn-title {
+    font-size: 2.6rem;
+    white-space: normal;
+  }
 }
 
 @media (max-width: 480px) {
@@ -370,5 +339,11 @@
   }
   .hymn-carousel-controls {
     padding: 0 1.2rem; /* móvil: separadas pero sin salirse */
+  }
+
+  /* En móviles pequeños reducir un poco más y permitir varias líneas */
+  #hymn-title {
+    font-size: 2.2rem;
+    white-space: normal;
   }
 }
